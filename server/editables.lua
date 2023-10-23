@@ -21,8 +21,7 @@ function DoesPlayerHaveItem(player_src, item)
 end
 
 function DiscordLog(player_src, event)
-    local xPlayer = ESX.GetPlayerFromId(player_src)
-    TriggerEvent("discord_manager:Log", "logs-others", "Car Heist:"..event.name, "Player: "..xPlayer.getName().." ("..xPlayer.getIdentifier()..")", "red", true)
+    -- Setup our discord log here.
 end
 
 function GetPoliceCount()
