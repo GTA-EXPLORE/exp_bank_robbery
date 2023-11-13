@@ -211,7 +211,7 @@ BANKS = {
         vault_door = {
             model = GetHashKey("v_ilev_gb_vauldr"),
             position = vector3(1175.542, 2710.861, 37.07689),
-            reset_yaw = 90
+            reset_yaw = 90.0
         },
         first_cash = {
             model = GetHashKey("hei_prop_hei_cash_trolly_01"),
@@ -226,7 +226,7 @@ BANKS = {
         door = {
             model = GetHashKey("v_ilev_gb_vaubar"),
             position = vector3(1172.291, 2713.146, 38.38625),
-            reset_yaw = 0
+            reset_yaw = 0.0
         },
         second_cash = {
             model = GetHashKey("hei_prop_hei_cash_trolly_01"),
