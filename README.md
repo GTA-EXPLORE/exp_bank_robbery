@@ -4,6 +4,13 @@ Dive into the heart-pounding world of high-stakes heists with our exclusive **Ba
 # Preview
 https://youtu.be/vPaZvDCkyhQ
 
+# Install
+- Clone or Download the repository.
+- Add the **exp_bank_robbery** to your resources folder.
+- Install [**exp_target_menu**](https://forum.cfx.re/t/free-explore-target-menu/5176144) (or ox_target).
+- Delete **client/_ox_main.lua** (or client/_exp_main.lua if you're using ox_target).
+- Add `ensure exp_bank_robbery` to your **server.cfg**.
+
 # Documentation
 You can find the complete [documentation](https://discord.com/channels/957638068465201172/1163399714927038494) on our [Discord](https://discord.gg/DnW5vvhkUc).
 
