@@ -21,9 +21,8 @@ function SetupBanks(bank_robbed)
         FreezeEntityPosition(vault_hack, true)
         SetEntityRotation(vault_hack, v.vault_hack.rotation)
         SetEntityInvincible(vault_hack, true)
-        
         vh_to_bank[vault_hack] = k
-
+        
         AddDoorToSystem(GetHashKey("bank_robbery_"..k), v.door.model, v.door.position)
 
         bank_to_vault[k] = CreateObject(v.vault_door.model, v.vault_door.position, false, false, false)
@@ -31,14 +30,13 @@ function SetupBanks(bank_robbed)
         SetEntityRotation(bank_to_vault[k], 0.0, 0.0, bank_robbed == k and v.vault_door.reset_yaw-90 or v.vault_door.reset_yaw)
         SetEntityInvincible(bank_to_vault[k], true)
         SetEntityAsMissionEntity(bank_to_vault[k])
-    end
-    AddMenuItems()
-end
 
-function AddMenuItems()
-    for k, v in pairs(vh_to_bank) do
-        TriggerEvent("exp_target_menu:AddEntityMenuItem", k, "exp_bank_robbery:StartVaultHack", _("hack_vault"))
-        TriggerEvent("exp_target_menu:SetEntityName", k, _("hack_vault_name"))
+        AddEntityMenuItem({
+            entity = vault_hack,
+            event = "exp_bank_robbery:StartVaultHack",
+            name = _("hack_vault_name"),
+            desc = _("hack_vault")
+        })
     end
 
     if bank then
@@ -46,10 +44,15 @@ function AddMenuItems()
         while bank and not DoesEntityExist(door_hack) do Wait(100)
             door_hack = GetClosestObjectOfType(bank.door_hack.position, 1.0, bank.door_hack.model)
         end
-        TriggerEvent("exp_target_menu:AddEntityMenuItem", door_hack, "exp_bank_robbery:StartDoorHack", _("hack_vault"))
-        TriggerEvent("exp_target_menu:SetEntityName", door_hack, _("hack_vault_name"))
+        AddEntityMenuItem({
+            entity = door_hack,
+            event = "exp_bank_robbery:StartDoorHack",
+            name = _("hack_vault_name"),
+            desc = _("hack_vault")
+        })
     end
 end
+
 
 RegisterNetEvent("esx:addInventoryItem")
 AddEventHandler("esx:addInventoryItem", function(item, count)
@@ -59,6 +62,7 @@ end)
 
 RegisterNetEvent("exp_bank_robbery:StartVaultHack")
 AddEventHandler("exp_bank_robbery:StartVaultHack", function(entity)
+    entity = type(entity) == "number" and entity or entity.entity
 
     if HACK_ITEM then
         TriggerServerCallback("exp_bank_robbery:HasItem", function(has_item)
@@ -90,6 +94,7 @@ end
 
 RegisterNetEvent("exp_bank_robbery:GrabCash")
 AddEventHandler("exp_bank_robbery:GrabCash", function(entity)
+    entity = type(entity) == "number" and entity or entity.entity
     player.Ped = PlayerPedId()
     if not DoesPedHaveAnyBag(player.Ped) then
         ShowNotification({
@@ -198,6 +203,7 @@ end
 
 RegisterNetEvent("exp_bank_robbery:StartDoorHack")
 AddEventHandler("exp_bank_robbery:StartDoorHack", function(entity)
+    entity = type(entity) == "number" and entity or entity.entity
     local success = AnimateHacking(entity)
     if success then
         TriggerServerEvent("exp_bank_robbery:LockDoor", bank.bank, false)
@@ -218,30 +224,55 @@ AddEventHandler("exp_bank_robbery:LockDoor", function(bank_id, state)
         while bank and not DoesEntityExist(first_cash) do Wait(100)
             first_cash = GetClosestObjectOfType(bank.first_cash.position, 1.0, bank.first_cash.model)
         end
-        TriggerEvent("exp_target_menu:AddEntityMenuItem", first_cash, "exp_bank_robbery:GrabCash", _("grab_cash"))
-        TriggerEvent("exp_target_menu:SetEntityName", first_cash, _("grab_cash_name"))
+
+        AddEntityMenuItem({
+            entity = first_cash,
+            event = "exp_bank_robbery:GrabCash",
+            name = _("grab_cash_name"),
+            desc = _("grab_cash")
+        })
 
         local second_cash = GetClosestObjectOfType(bank.second_cash.position, 1.0, bank.second_cash.model)
         while bank and not DoesEntityExist(second_cash) do Wait(100)
             second_cash = GetClosestObjectOfType(bank.second_cash.position, 1.0, bank.second_cash.model)
         end
-        TriggerEvent("exp_target_menu:AddEntityMenuItem", second_cash, "exp_bank_robbery:GrabCash", _("grab_cash"))
-        TriggerEvent("exp_target_menu:SetEntityName", second_cash, _("grab_cash_name"))
+        AddEntityMenuItem({
+            entity = second_cash,
+            event = "exp_bank_robbery:GrabCash",
+            name = _("grab_cash_name"),
+            desc = _("grab_cash")
+        })
 
         local third_cash = GetClosestObjectOfType(bank.third_cash.position, 1.0, bank.third_cash.model)
         while bank and not DoesEntityExist(third_cash) do Wait(100)
             third_cash = GetClosestObjectOfType(bank.third_cash.position, 1.0, bank.third_cash.model)
         end
-        TriggerEvent("exp_target_menu:AddEntityMenuItem", third_cash, "exp_bank_robbery:GrabCash", _("grab_cash"))
-        TriggerEvent("exp_target_menu:SetEntityName", third_cash, _("grab_cash_name"))
+
+        AddEntityMenuItem({
+            entity = third_cash,
+            event = "exp_bank_robbery:GrabCash",
+            name = _("grab_cash_name"),
+            desc = _("grab_cash")
+        })
 
         local door_hack = GetClosestObjectOfType(bank.door_hack.position, 1.0, bank.door_hack.model)
         while bank and not DoesEntityExist(door_hack) do Wait(100)
             door_hack = GetClosestObjectOfType(bank.door_hack.position, 1.0, bank.door_hack.model)
         end
-        TriggerEvent("exp_target_menu:AddEntityMenuItem", door_hack, "exp_bank_robbery:StartDoorHack", _("hack_vault"))
-        TriggerEvent("exp_target_menu:SetEntityName", door_hack, _("hack_vault_name"))
 
+        AddEntityMenuItem({
+            entity = door_hack,
+            event = "exp_bank_robbery:StartDoorHack",
+            name = _("hack_vault_name"),
+            desc = _("hack_vault")
+        })
+
+        if GetResourceState("exp_target_menu") == "started" then
+            exports.exp_target_menu:SetModelOffset({
+                model = bank.first_cash.model,
+                offset = vector3(0.0, 0.0, 0.5)
+            })
+        end
     end
 end)
 
