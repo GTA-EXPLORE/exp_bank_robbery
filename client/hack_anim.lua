@@ -58,16 +58,17 @@ function AnimateHacking(panel)
     Wait(1000)
     local is_hack_finished, has_succeeded = false, false
     Citizen.CreateThread(function()
-        StartHacking(function(success)
+        StartHack(function ()
             is_hack_finished = true
-            has_succeeded = success
-            if not success then
-                ShowNotification({
-                    title = _("hack_failed_name"),
-                    message = _("hack_failed"),
-                    type = "error"
-                })
-            end
+            has_succeeded = true
+        end, function ()
+            is_hack_finished = true
+            has_succeeded = false
+            ShowNotification({
+                title = _("hack_failed_name"),
+                message = _("hack_failed"),
+                type = "error"
+            })
         end)
     end)
     Wait(GetAnimDuration("anim@heists@ornate_bank@hack", "hack_loop_laptop")*1000-1100)

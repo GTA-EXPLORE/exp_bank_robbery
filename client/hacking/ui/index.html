@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css" type="text/css">
+    </head>
+    <body>
+        <div class="screen">
+            <div class="left">
+                <ul class="logs">
+                    <li class="cmd-0">$ sudo hack-connect -t 192.168.1.100</li>
+                    <li class="cmd-0">Connection established. Target: 192.168.1.100</li>
+                    <li class="cmd-0">$ python firewall_bypass.py</li>
+                    <li class="cmd-1">Firewall successfully bypassed.</li>
+                    <li class="cmd-1">$ openssl decrypt -i secret_file.enc -o decrypted_file.txt -k my_key.pem</li>
+                    <li class="cmd-2">Decryption successful. Output saved to decrypted_file.txt.</li>
+                    <li class="cmd-2">$ exploit -vuln apache2.4.10 -p 8080</li>
+                    <li class="cmd-3">Exploiting vulnerability apache2.4.10 on port 8080... Access granted.</li>
+                    <li class="cmd-3">$ cat /etc/passwd</li>
+                    <li class="cmd-4">K\y:O$Myi-1\p@#r:Kf31[GJ</li>
+                    <li class="cmd-4">$ shred -u logs/*</li>
+                    <li class="cmd-4">Covering tracks... Logs shredded.</li>
+                    <li class="cmd-error">An error occured.</li>
+                    <li class="cmd-5">$ exit</li>
+                </ul>
+                <div class="input">$ <span class="underscore">_</span></div>
+            </div>
+            <div class="right">
+                <div class="button" data-btnid="0"></div>
+                <div class="button" data-btnid="1"></div>
+                <div class="button" data-btnid="2"></div>
+                <div class="button" data-btnid="3"></div>
+                <div class="button" data-btnid="4"></div>
+                <div class="button" data-btnid="5"></div>
+            </div>
+        </div>
+        <div class="hack-effect"></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="script.js" type="text/javascript"></script>
+    </body>
+</html>
