@@ -14,7 +14,19 @@ function AddEntityMenuItem(data)
             label = data.desc,
             event = data.event,
             distance = 1.5
-          })
+        })
+    end
+
+    if GetResourceState("qb-target") == "started" then
+        exports["qb-target"]:AddTargetEntity(data.entity, {
+            options = {
+                {
+                    label = data.desc,
+                    event = data.event,
+                }
+            },
+            distance = 1.5
+        })
     end
 end
 
