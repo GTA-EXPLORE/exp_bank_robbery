@@ -19,6 +19,7 @@ We are working on other **resources**. You can check them out on our [website](h
 # Updates
 ### Dec 26, 2023
 > - Now automatically compatible with **QB-Core**.
+> - Now is also compatible with **QB-Target**.
 > - Replaced the **hacking minigame** with a brand new one!
 
 ### Nov 25, 2023
