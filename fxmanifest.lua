@@ -9,7 +9,7 @@ this_is_a_map 'yes'
 client_scripts {
 	"locales/*",
 	'config.lua',
-	'client/*',
+	'client/**/*.lua',
 }
 
 server_scripts {
@@ -19,8 +19,8 @@ server_scripts {
 	'server/*',
 }
 
-escrow_ignore {
-    "**/editables.lua",
-    "locales/*",
-    "config.lua"
+ui_page "client/hacking/ui/index.html"
+
+files {
+    "client/hacking/ui/**/*"
 }
