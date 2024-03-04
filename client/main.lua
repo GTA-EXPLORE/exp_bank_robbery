@@ -53,13 +53,6 @@ function SetupBanks(bank_robbed)
     end
 end
 
-
-RegisterNetEvent("esx:addInventoryItem")
-AddEventHandler("esx:addInventoryItem", function(item, count)
-    if item ~= "laptop" then return end
-    AddMenuItems()
-end)
-
 RegisterNetEvent("exp_bank_robbery:StartVaultHack")
 AddEventHandler("exp_bank_robbery:StartVaultHack", function(entity)
     entity = type(entity) == "number" and entity or entity.entity
