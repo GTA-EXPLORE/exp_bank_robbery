@@ -41,7 +41,7 @@ if GetResourceState("qb-core") == "started" then
     function GetPoliceCount()
         local count = 0
         for ServerId, Player in ipairs(QBCore.Functions.GetQBPlayers()) do
-            if Player.PlayerData.job.name == "police" then
+            if Player.PlayerData.job.type == "leo" then
                 count = count + 1
             end
         end
