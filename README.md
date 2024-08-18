@@ -6,8 +6,8 @@ https://youtu.be/vPaZvDCkyhQ
 
 # Install
 - Clone or Download the repository.
-- Add the **exp_bank_robbery** to your resources folder.
-- Install [**exp_target_menu**](https://forum.cfx.re/t/free-explore-target-menu/5176144) (or ox_target).
+- Add the **exp_bank_robbery** folder to your resources folder.
+- Install **ox_target**.
 - Add `ensure exp_bank_robbery` to your **server.cfg**.
 
 # Documentation
