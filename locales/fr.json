@@ -1,0 +1,23 @@
+{
+    "hack": "Pirater",
+    
+    "hack_vault": "Pirater",
+    "hack_vault_name": "Panneau de contrôle",
+
+    "grab_cash": "Prendre",
+    "grab_cash_name": "Billets",
+
+    "no_laptop": "~r~Il te manque quelque chose.~s~",
+    "vault_empty": "~r~La sécurité est en alerte. Reviens plus tard.~s~",
+
+    "alert_title": "Braquage de banque",
+    "alert_content": "Un vol à mains armées est en cours!",
+
+    "no_bag": "~r~Il te manque un sac.~s~",
+    
+    "hack_failed_name": "Ordinateur",
+    "hack_failed": "~r~Piratage échoué.~s~",
+    
+    "not_enough_police_title": "Braquage de banque",
+    "not_enough_police": "~r~Il n'y a pas assez de policiers en ville.~r~"
+}

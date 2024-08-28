@@ -1,11 +1,12 @@
 player = {}
 bank_to_vault = {}
 local bank = nil
+Entities = {}
 
 Citizen.CreateThread(function()
     while not DoesEntityExist(PlayerPedId()) do Wait(100) end
 
-    TriggerServerCallback("exp_bank_robbery:GetBankRobbed", function(bank_robbed)
+    SD.Callback("exp_bank_robbery:GetBankRobbed", false, function(bank_robbed)
         SetupBanks(bank_robbed)
     end)
 end)
@@ -22,6 +23,7 @@ function SetupBanks(bank_robbed)
         SetEntityRotation(vault_hack, v.vault_hack.rotation)
         SetEntityInvincible(vault_hack, true)
         vh_to_bank[vault_hack] = k
+        Entities[#Entities+1] = vault_hack
         
         AddDoorToSystem(GetHashKey("bank_robbery_"..k), v.door.model, v.door.position)
 
@@ -30,12 +32,13 @@ function SetupBanks(bank_robbed)
         SetEntityRotation(bank_to_vault[k], 0.0, 0.0, bank_robbed == k and v.vault_door.reset_yaw-90 or v.vault_door.reset_yaw)
         SetEntityInvincible(bank_to_vault[k], true)
         SetEntityAsMissionEntity(bank_to_vault[k])
+        Entities[#Entities+1] = bank_to_vault[k]
 
         AddEntityMenuItem({
             entity = vault_hack,
             event = "exp_bank_robbery:StartVaultHack",
-            name = _("hack_vault_name"),
-            desc = _("hack_vault")
+            name = SD.Locale.T("hack_vault_name"),
+            desc = SD.Locale.T("hack_vault")
         })
     end
 
@@ -47,19 +50,25 @@ function SetupBanks(bank_robbed)
         AddEntityMenuItem({
             entity = door_hack,
             event = "exp_bank_robbery:StartDoorHack",
-            name = _("hack_vault_name"),
-            desc = _("hack_vault")
+            name = SD.Locale.T("hack_vault_name"),
+            desc = SD.Locale.T("hack_vault")
         })
     end
 end
 
-RegisterNetEvent("exp_bank_robbery:StartVaultHack")
-AddEventHandler("exp_bank_robbery:StartVaultHack", function(entity)
-    entity = type(entity) == "number" and entity or entity.entity
+RegisterNetEvent("exp_bank_robbery:StartVaultHack", function(data)
+    local entity = data.entity
 
     if HACK_ITEM then
-        TriggerServerCallback("exp_bank_robbery:HasItem", function(has_item)
-            if not has_item then return end
+        SD.Callback("exp_bank_robbery:HasItem", false, function(has_item)
+            if not has_item then
+                ShowNotification({
+                    title = SD.Locale.T("hack_vault"),
+                    message = SD.Locale.T("no_laptop"),
+                    type = "error"
+                })
+                return
+            end
             
             StartVaultHack(entity)
         end, HACK_ITEM)
@@ -71,7 +80,8 @@ end)
 function StartVaultHack(entity)
     bank = BANKS[vh_to_bank[entity]]
     bank.bank = vh_to_bank[entity]
-    TriggerServerCallback("exp_bank_robbery:CanBeRobbed", function()
+    SD.Callback("exp_bank_robbery:CanBeRobbed", false, function(allowed)
+        if not allowed then return end
         player.Ped = PlayerPedId()
         
         local success = AnimateHacking(entity)
@@ -81,18 +91,22 @@ function StartVaultHack(entity)
             PrepareInside()
             
             TriggerServerEvent("exp_bank_robbery:OpenVaultDoor", bank.bank)
+            ShowNotification({
+                title = SD.Locale.T("hack_vault_name"),
+                message = SD.Locale.T("vault_hacked"),
+                type = "success"
+            })
         end
     end, bank.bank)
 end
 
-RegisterNetEvent("exp_bank_robbery:GrabCash")
-AddEventHandler("exp_bank_robbery:GrabCash", function(entity)
-    entity = type(entity) == "number" and entity or entity.entity
+RegisterNetEvent("exp_bank_robbery:GrabCash", function(data)
+    local entity = data.entity
     player.Ped = PlayerPedId()
     if not DoesPedHaveAnyBag(player.Ped) then
         ShowNotification({
-            title = _("no_bag_name"),
-            message = _("no_bag"),
+            title = SD.Locale.T("grab_cash"),
+            message = SD.Locale.T("no_bag"),
             type = "error"
         })
         return
@@ -135,6 +149,7 @@ function PrepareInside()
     SetEntityRotation(first_cash, bank.first_cash.rotation)
     FreezeEntityPosition(first_cash, true)
     PlaceObjectOnGroundProperly(first_cash)
+    Entities[#Entities+1] = first_cash
 
     -- SECOND CASH LOCATION
 
@@ -156,6 +171,7 @@ function PrepareInside()
     SetEntityRotation(second_cash, bank.second_cash.rotation)
     FreezeEntityPosition(second_cash, true)
     PlaceObjectOnGroundProperly(second_cash)
+    Entities[#Entities+1] = second_cash
 
     -- THIRD CASH LOCATION
 
@@ -177,6 +193,7 @@ function PrepareInside()
     SetEntityRotation(third_cash, bank.third_cash.rotation)
     FreezeEntityPosition(third_cash, true)
     PlaceObjectOnGroundProperly(third_cash)
+    Entities[#Entities+1] = third_cash
 
     -- DOOR HACK LOCATION
 
@@ -190,16 +207,22 @@ function PrepareInside()
     local door_hack = CreateObject(bank.door_hack.model, bank.door_hack.position, true, true)
     SetEntityRotation(door_hack, bank.door_hack.rotation)
     FreezeEntityPosition(door_hack, true)
+    Entities[#Entities+1] = door_hack
 
     TriggerServerEvent("exp_bank_robbery:LockDoor", bank.bank, true)
 end
 
-RegisterNetEvent("exp_bank_robbery:StartDoorHack")
-AddEventHandler("exp_bank_robbery:StartDoorHack", function(entity)
-    entity = type(entity) == "number" and entity or entity.entity
+RegisterNetEvent("exp_bank_robbery:StartDoorHack", function(data)
+    local entity = data.entity
     local success = AnimateHacking(entity)
     if success then
         TriggerServerEvent("exp_bank_robbery:LockDoor", bank.bank, false)
+
+        ShowNotification({
+            title = SD.Locale.T("hack_door_name"),
+            message = SD.Locale.T("door_hacked"),
+            type = "success"
+        })
     end
 end)
 
@@ -207,8 +230,7 @@ function AddMoneyToBag()
     player.MoneyBag = player.MoneyBag + MONEY_PER_STACK
 end
 
-RegisterNetEvent("exp_bank_robbery:LockDoor")
-AddEventHandler("exp_bank_robbery:LockDoor", function(bank_id, state)
+RegisterNetEvent("exp_bank_robbery:LockDoor", function(bank_id, state)
     DoorSystemSetDoorState(GetHashKey("bank_robbery_"..bank_id), state)
     if state then
         bank = BANKS[bank_id]
@@ -221,8 +243,8 @@ AddEventHandler("exp_bank_robbery:LockDoor", function(bank_id, state)
         AddEntityMenuItem({
             entity = first_cash,
             event = "exp_bank_robbery:GrabCash",
-            name = _("grab_cash_name"),
-            desc = _("grab_cash")
+            name = SD.Locale.T("grab_cash_name"),
+            desc = SD.Locale.T("grab_cash")
         })
 
         local second_cash = GetClosestObjectOfType(bank.second_cash.position, 1.0, bank.second_cash.model)
@@ -232,8 +254,8 @@ AddEventHandler("exp_bank_robbery:LockDoor", function(bank_id, state)
         AddEntityMenuItem({
             entity = second_cash,
             event = "exp_bank_robbery:GrabCash",
-            name = _("grab_cash_name"),
-            desc = _("grab_cash")
+            name = SD.Locale.T("grab_cash_name"),
+            desc = SD.Locale.T("grab_cash")
         })
 
         local third_cash = GetClosestObjectOfType(bank.third_cash.position, 1.0, bank.third_cash.model)
@@ -244,8 +266,8 @@ AddEventHandler("exp_bank_robbery:LockDoor", function(bank_id, state)
         AddEntityMenuItem({
             entity = third_cash,
             event = "exp_bank_robbery:GrabCash",
-            name = _("grab_cash_name"),
-            desc = _("grab_cash")
+            name = SD.Locale.T("grab_cash_name"),
+            desc = SD.Locale.T("grab_cash")
         })
 
         local door_hack = GetClosestObjectOfType(bank.door_hack.position, 1.0, bank.door_hack.model)
@@ -256,8 +278,8 @@ AddEventHandler("exp_bank_robbery:LockDoor", function(bank_id, state)
         AddEntityMenuItem({
             entity = door_hack,
             event = "exp_bank_robbery:StartDoorHack",
-            name = _("hack_vault_name"),
-            desc = _("hack_vault")
+            name = SD.Locale.T("hack_vault_name"),
+            desc = SD.Locale.T("hack_vault")
         })
 
         if GetResourceState("exp_target_menu") == "started" then
@@ -269,23 +291,20 @@ AddEventHandler("exp_bank_robbery:LockDoor", function(bank_id, state)
     end
 end)
 
-RegisterNetEvent("exp_bank_robbery:OpenVaultDoor")
-AddEventHandler("exp_bank_robbery:OpenVaultDoor", function(bank_id)
+RegisterNetEvent("exp_bank_robbery:OpenVaultDoor", function(bank_id)
     for i = 1, 90, 0.2 do
         SetEntityRotation(bank_to_vault[bank_id], 0.0, 0.0, BANKS[bank_id].vault_door.reset_yaw-i)
         Wait(10)
     end
 end)
 
-RegisterNetEvent("exp_bank_robbery:CloseVaultDoor")
-AddEventHandler("exp_bank_robbery:CloseVaultDoor", function(bank_id)
+RegisterNetEvent("exp_bank_robbery:CloseVaultDoor", function(bank_id)
     SetEntityRotation(bank_to_vault[bank_id], 0.0, 0.0, BANKS[bank_id].vault_door.reset_yaw)
     bank = nil
 end)
 
-RegisterNetEvent("exp_bank_robbery:ShowPoliceAlert")
-AddEventHandler("exp_bank_robbery:ShowPoliceAlert", function(position)
-    local blip_icon = SetBlip(_("alert_title"), position, POL_ALERT_SPRITE, POL_ALERT_COLOR, 1.0)
+RegisterNetEvent("exp_bank_robbery:ShowPoliceAlert", function(position)
+    local blip_icon = SetBlip(SD.Locale.T("alert_title"), position, POL_ALERT_SPRITE, POL_ALERT_COLOR, 1.0)
     SetBlipAsShortRange(blip_icon, false)
     if POL_ALERT_WAVE then
         local blip_wave = SetBlip("", position, 161, POL_ALERT_COLOR, 1.0)
@@ -298,12 +317,18 @@ AddEventHandler("exp_bank_robbery:ShowPoliceAlert", function(position)
     RemoveBlip(blip_icon)
     RemoveBlip(blip_wave)
     ShowNotification({
-        title = _("alert_title"),
-        message = _("alert_content")
+        title = SD.Locale.T("alert_title"),
+        message = SD.Locale.T("alert_content")
     })
 end)
 
-RegisterNetEvent("exp_bank_robbery:ShowNotification")
-AddEventHandler("exp_bank_robbery:ShowNotification", function(data)
+RegisterNetEvent("exp_bank_robbery:ShowNotification", function(data)
     ShowNotification(data)
+end)
+
+AddEventHandler("onResourceStop", function(resourceName)
+    if GetCurrentResourceName() ~= resourceName then return end
+    for index, value in ipairs(Entities) do
+        DeleteEntity(value)
+    end
 end)

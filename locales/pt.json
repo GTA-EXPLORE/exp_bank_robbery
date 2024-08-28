@@ -1,0 +1,23 @@
+{
+    "hack": "Hackear",
+
+    "hack_vault": "Hackear",
+    "hack_vault_name": "Painel de Controle",
+
+    "grab_cash": "Pegar",
+    "grab_cash_name": "Pilhas de Dinheiro",
+
+    "no_laptop": "~r~Está faltando algo.~s~",
+    "vault_empty": "~r~A segurança está em alerta. Volte mais tarde.~s~",
+
+    "alert_title": "Assalto ao Banco",
+    "alert_content": "Está ocorrendo um assalto à mão armada!",
+
+    "no_bag": "~r~Está faltando uma bolsa.~s~",
+
+    "hack_failed_name": "Laptop",
+    "hack_failed": "~r~O hack falhou.~s~",
+
+    "not_enough_police_title": "Assalto ao Banco",
+    "not_enough_police": "~r~Não há policiais suficientes online.~s~"
+}
