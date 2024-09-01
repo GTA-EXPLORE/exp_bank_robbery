@@ -7,17 +7,17 @@
     "grab_cash": "Pegar",
     "grab_cash_name": "Pilhas de Dinheiro",
 
-    "no_laptop": "~r~Está faltando algo.~s~",
-    "vault_empty": "~r~A segurança está em alerta. Volte mais tarde.~s~",
+    "no_laptop": "Está faltando algo.",
+    "vault_empty": "A segurança está em alerta. Volte mais tarde.",
 
     "alert_title": "Assalto ao Banco",
     "alert_content": "Está ocorrendo um assalto à mão armada!",
 
-    "no_bag": "~r~Está faltando uma bolsa.~s~",
+    "no_bag": "Está faltando uma bolsa.",
 
     "hack_failed_name": "Laptop",
-    "hack_failed": "~r~O hack falhou.~s~",
+    "hack_failed": "O hack falhou.",
 
     "not_enough_police_title": "Assalto ao Banco",
-    "not_enough_police": "~r~Não há policiais suficientes online.~s~"
+    "not_enough_police": "Não há policiais suficientes online."
 }

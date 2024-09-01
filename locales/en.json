@@ -12,17 +12,17 @@
     "grab_cash": "Grab money stacks",
     "grab_cash_name": "Money Stacks",
 
-    "no_laptop": "~r~You're missing something.~s~",
-    "vault_empty": "~r~The security is under alert. Comeback later.~s~",
+    "no_laptop": "You're missing something.",
+    "vault_empty": "The security is under alert. Comeback later.",
 
     "alert_title": "Bank Robbery",
     "alert_content": "An armed robbery is going on!",
 
-    "no_bag": "~r~You're missing a bag.~s~",
+    "no_bag": "You're missing a bag.",
 
     "hack_failed_name": "Laptop",
-    "hack_failed": "~r~Hack failed.~s~",
+    "hack_failed": "Hack failed.",
 
     "not_enough_police_title": "Bank Robbery",
-    "not_enough_police": "~r~There is not enough cop online.~s~"
+    "not_enough_police": "There is not enough cop online."
 }

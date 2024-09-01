@@ -1,0 +1,28 @@
+{
+    "hack": "Hack",
+
+    "hack_vault": "Hack de kluisdeur",
+    "hack_vault_name": "Kluisdeur",
+    "vault_hacked": "Kluisdeur succesvol gehackt!",
+
+    "hack_door": "Hack de deur",
+    "hack_door_name": "Deur",
+    "door_hacked": "Deur succesvol gehackt!",
+
+    "grab_cash": "Pak geldstapels",
+    "grab_cash_name": "Geldstapels",
+
+    "no_laptop": "Je mist iets.",
+    "vault_empty": "De beveiliging is gealarmeerd. Kom later terug.",
+
+    "alert_title": "Bankoverval",
+    "alert_content": "Er is een gewapende overval aan de gang!",
+
+    "no_bag": "Je mist een tas.",
+
+    "hack_failed_name": "Laptop",
+    "hack_failed": "Hack mislukt.",
+
+    "not_enough_police_title": "Bankoverval",
+    "not_enough_police": "Er zijn niet genoeg agenten online."
+}

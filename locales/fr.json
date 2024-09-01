@@ -7,17 +7,17 @@
     "grab_cash": "Prendre",
     "grab_cash_name": "Billets",
 
-    "no_laptop": "~r~Il te manque quelque chose.~s~",
-    "vault_empty": "~r~La sécurité est en alerte. Reviens plus tard.~s~",
+    "no_laptop": "Il te manque quelque chose.",
+    "vault_empty": "La sécurité est en alerte. Reviens plus tard.",
 
     "alert_title": "Braquage de banque",
     "alert_content": "Un vol à mains armées est en cours!",
 
-    "no_bag": "~r~Il te manque un sac.~s~",
+    "no_bag": "Il te manque un sac.",
     
     "hack_failed_name": "Ordinateur",
-    "hack_failed": "~r~Piratage échoué.~s~",
+    "hack_failed": "Piratage échoué.",
     
     "not_enough_police_title": "Braquage de banque",
-    "not_enough_police": "~r~Il n'y a pas assez de policiers en ville.~r~"
+    "not_enough_police": "Il n'y a pas assez de policiers en ville."
 }

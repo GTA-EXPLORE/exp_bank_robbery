@@ -1,0 +1,28 @@
+{
+    "hack": "Hack",
+
+    "hack_vault": "Hack hvelvdøren",
+    "hack_vault_name": "Hvelvdør",
+    "vault_hacked": "Hvelvdør hacket med suksess!",
+
+    "hack_door": "Hack døren",
+    "hack_door_name": "Dør",
+    "door_hacked": "Dør hacket med suksess!",
+
+    "grab_cash": "Ta pengestablene",
+    "grab_cash_name": "Pengestabler",
+
+    "no_laptop": "Du mangler noe.",
+    "vault_empty": "Sikkerheten er på vakt. Kom tilbake senere.",
+
+    "alert_title": "Bankran",
+    "alert_content": "Et væpnet ran pågår!",
+
+    "no_bag": "Du mangler en veske.",
+
+    "hack_failed_name": "Laptop",
+    "hack_failed": "Hack mislyktes.",
+
+    "not_enough_police_title": "Bankran",
+    "not_enough_police": "Det er ikke nok politifolk online."
+}

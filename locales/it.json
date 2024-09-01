@@ -1,0 +1,28 @@
+{
+    "hack": "Hack",
+
+    "hack_vault": "Hacker la porta del caveau",
+    "hack_vault_name": "Porta del caveau",
+    "vault_hacked": "Porta del caveau hackerata con successo!",
+
+    "hack_door": "Hacker la porta",
+    "hack_door_name": "Porta",
+    "door_hacked": "Porta hackerata con successo!",
+
+    "grab_cash": "Prendi le pile di soldi",
+    "grab_cash_name": "Pile di soldi",
+
+    "no_laptop": "Ti manca qualcosa.",
+    "vault_empty": "La sicurezza è in allerta. Torna più tardi.",
+
+    "alert_title": "Rapina in banca",
+    "alert_content": "È in corso una rapina a mano armata!",
+
+    "no_bag": "Ti manca una borsa.",
+
+    "hack_failed_name": "Laptop",
+    "hack_failed": "Hack fallito.",
+
+    "not_enough_police_title": "Rapina in banca",
+    "not_enough_police": "Non ci sono abbastanza poliziotti online."
+}

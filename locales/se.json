@@ -1,0 +1,28 @@
+{
+    "hack": "Hacka",
+
+    "hack_vault": "Hacka valvdörren",
+    "hack_vault_name": "Valvdörr",
+    "vault_hacked": "Valvdörr hackad framgångsrikt!",
+
+    "hack_door": "Hacka dörren",
+    "hack_door_name": "Dörr",
+    "door_hacked": "Dörr hackad framgångsrikt!",
+
+    "grab_cash": "Ta pengabuntarna",
+    "grab_cash_name": "Pengabuntar",
+
+    "no_laptop": "Du saknar något.",
+    "vault_empty": "Säkerheten är på alerten. Kom tillbaka senare.",
+
+    "alert_title": "Bankrån",
+    "alert_content": "Ett väpnat rån pågår!",
+
+    "no_bag": "Du saknar en väska.",
+
+    "hack_failed_name": "Laptop",
+    "hack_failed": "Hack misslyckades.",
+
+    "not_enough_police_title": "Bankrån",
+    "not_enough_police": "Det finns inte tillräckligt med poliser online."
+}
