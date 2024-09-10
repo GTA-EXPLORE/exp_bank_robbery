@@ -1,0 +1,29 @@
+{
+    "hack": "Hack",
+
+    "hack_vault": "Kasa kapısını hackle",
+    "hack_vault_name": "Kasa Kapısı",
+    "vault_hacked": "Kasa Kapısı başarıyla hacklendi!",
+
+    "hack_door": "Kapıyı hackle",
+    "hack_door_name": "Kapı",
+    "door_hacked": "Kapı başarıyla hacklendi!",
+
+    "grab_cash": "Para yığınlarını al",
+    "grab_cash_name": "Para Yığınları",
+
+    "no_laptop": "Bir şeyler eksik.",
+    "vault_empty": "Güvenlik alarmda. Daha sonra geri gelin.",
+
+    "alert_title": "Banka Soygunu",
+    "alert_content": "Silahlı bir soygun yapılıyor!",
+
+    "no_bag": "Bir çanta eksik.",
+
+    "hack_failed_name": "Laptop",
+    "hack_failed": "Hack başarısız oldu.",
+
+
+    "not_enough_police_title": "Banka Soygunu",
+    "not_enough_police": "Çevrimiçi yeterli polis yok."
+}
