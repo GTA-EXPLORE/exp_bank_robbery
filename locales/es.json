@@ -1,8 +1,13 @@
 {
     "hack": "Hackear",
 
-    "hack_vault": "Hackear",
-    "hack_vault_name": "Panel de Control",
+    "hack_vault": "Hackear la Bóveda",
+    "hack_vault_name": "Bóveda",
+    "vault_hacked": "¡Bóveda hackeada con éxito!",
+
+    "hack_door": "Hackear la puerta",
+    "hack_door_name": "Puerta",
+    "door_hacked": "¡Puerta hackeada con éxito!",
 
     "grab_cash": "Agarrar",
     "grab_cash_name": "Montones de Dinero",
@@ -11,7 +16,7 @@
     "vault_empty": "La seguridad está en alerta. Vuelve más tarde.",
 
     "alert_title": "Robo Bancario",
-    "alert_content": "¡Está ocurriendo un robo a mano armada!",
+    "alert_content": "¡Se está produciendo un robo a mano armada!",
 
     "no_bag": "Te falta una bolsa.",
 
