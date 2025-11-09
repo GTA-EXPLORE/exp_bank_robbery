@@ -1,3 +1,16 @@
+-- [[ DÉBUT CORRECTION: Attente de SD.lib ]]
+Citizen.CreateThread(function()
+    while _G.SD == nil or _G.SD.Callback == nil or _G.SD.Name == nil or _G.SD.Logger == nil or _G.SD.Money == nil or _G.SD.Inventory == nil do
+        print("[exp_bank_robbery] (main.lua) En attente de la librairie SD...")
+        Wait(1000)
+    end
+end)
+while _G.SD == nil or _G.SD.Callback == nil or _G.SD.Name == nil or _G.SD.Logger == nil or _G.SD.Money == nil or _G.SD.Inventory == nil do
+    Wait(10)
+end
+print("[exp_bank_robbery] (main.lua) Librairie SD chargée.")
+-- [[ FIN CORRECTION ]]
+
 local bank_robbed = nil
 
 SD.Callback.Register("exp_bank_robbery:CanBeRobbed", function(source, bank_id)
@@ -29,7 +42,7 @@ SD.Callback.Register("exp_bank_robbery:CanBeRobbed", function(source, bank_id)
         Wait(BANK_TIMER)
         TriggerClientEvent("exp_bank_robbery:CloseVaultDoor", -1, bank_id)
         bank_robbed = nil
-        DiscordLog(_source, {
+        DiscordLog(source, { -- Correction: _source n'existe pas, on utilise 'source'
             name = "reset",
             message = "Bank Robbery is reset.\nBank ID: "..bank_id
         })
@@ -68,7 +81,14 @@ SD.Callback.Register("exp_bank_robbery:GetBankRobbed", function(source)
 end)
 
 SD.Callback.Register("exp_bank_robbery:HasItem", function(source, item)
-    return(SD.Inventory.HasItem(source, item) == 1)
+    -- [[ CORRECTION CHANGELOG v1.0.6 ]]
+    -- HasItem renvoie maintenant la QUANTITÉ, pas 1.
+    if SD.Inventory.HasItem(source, item) > 0 then
+        return true
+    else
+        return false
+    end
+    -- [[ FIN CORRECTION ]]
 end)
 
 function ShowNotification(player_src, event)

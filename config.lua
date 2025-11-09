@@ -13,7 +13,7 @@
 LANGUAGE = 'en'
 
 MONEY_PER_STACK = 150
-MONEY_TYPE = "money"
+MONEY_TYPE = "cash"
 
 BANK_TIMER = 60 * 60000     -- 60 minutes
 
